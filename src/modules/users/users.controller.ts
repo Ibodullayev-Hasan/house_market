@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 import { AuthGuard } from 'src/common/guards/role.guard';
 import { Roles } from 'src/decorators/roles.decorator';
-import { RolesEnum } from 'src/enums';
+import { RolesEnum } from 'src/enums/role.enum';
 
 @Controller('users')
 @UseGuards(JwtAuthGuard, AuthGuard)
