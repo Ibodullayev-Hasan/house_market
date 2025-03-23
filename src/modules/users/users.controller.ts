@@ -2,15 +2,18 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
-
+import { AuthGuard } from 'src/common/guards/role.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { RolesEnum } from 'src/enums/role.enum';
 
 @Controller('users')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, AuthGuard)
 export class UsersController {
 
   constructor(private readonly usersService: UsersService) { }
 
   @Get('all')
+  @Roles(RolesEnum.ADMIN)
   findAll() {
     return this.usersService.findAll();
   }
