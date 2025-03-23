@@ -6,7 +6,7 @@ export const SwaggerConfig = (app: INestApplication) => {
 
 	const configService = app.get(ConfigService); // ConfigService ni olish
 
-	const baseUrl = configService.get<string>('API_URL') || 'http://localhost:3000';
+	const baseUrl = configService.get<string>('API_URL') || `http://localhost:${configService.get<string>('PORT')}`;
 
 	const options = new DocumentBuilder()
 		.setTitle('House market')
@@ -18,5 +18,9 @@ export const SwaggerConfig = (app: INestApplication) => {
 		.build()
 
 	const document = SwaggerModule.createDocument(app, options)
-	SwaggerModule.setup('api/docs', app, document)
+	SwaggerModule.setup('api/docs', app, document, {
+		swaggerOptions: {
+			persistAuthorization: true
+		}
+	})
 }
