@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { PropertiesModule } from './modules/properties/properties.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { JwtModule } from '@nestjs/jwt';
     TypeOrmModule.forRootAsync(TypeOrmConfig),
 
     UsersModule,
-    AuthModule
+    AuthModule,
+    PropertiesModule
 
   ],
   controllers: [],
