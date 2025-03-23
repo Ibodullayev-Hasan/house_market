@@ -24,10 +24,10 @@ export class CreateUserDto {
 	@IsEmail()
 	email: string;
 
-	@ApiProperty({ example: "admin | user", description: "Foydalanuvchi roli",  })
-	@IsOptional()
-	@IsEnum(RolesEnum, { message: "The role should only be admin or user" })
-	role?: string;
+	// @ApiProperty({ example: RolesEnum, description: "Foydalanuvchi roli",  })
+	// @IsOptional()
+	// @IsEnum(RolesEnum, { message: "The role should only be admin or user" })
+	// role?: string;
 
 	@ApiProperty({
 		example: "Aaa123",
