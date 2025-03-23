@@ -1,5 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, Length, Matches } from "class-validator";
+import { RolesEnum } from "src/enums";
 
 export class CreateUserDto {
 
@@ -25,7 +26,7 @@ export class CreateUserDto {
 
 	@ApiProperty({ example: "admin | user", description: "Foydalanuvchi roli",  })
 	@IsOptional()
-	// @IsEnum("user" | "admin", { message: "The role should only be admin or user" })
+	@IsEnum(RolesEnum, { message: "The role should only be admin or user" })
 	role?: string;
 
 	@ApiProperty({
@@ -37,7 +38,7 @@ export class CreateUserDto {
 	@IsNotEmpty()
 	@IsString()
 	@Length(4, 8, { message: "Password must be at least 4 characters and at most 8 characters." })
-	@Matches(/^(?=.*[A-Z])(?=.*[a-z])(?=(?:.*\d){3,})[A-Za-z\d]{6,8}$/, {
+	@Matches(/^(?=.*[A-Z])(?=.*[a-z])(?=(?:.*\d){3,})[A-Za-z\d]{4,8}$/, {
 		message: "Parol kamida 1 ta katta harf, 1 ta kichik harf va 3 ta raqamdan iborat bo‘lishi kerak (maxsus belgilar kiritilmasin)"
 	})
 	password: string;

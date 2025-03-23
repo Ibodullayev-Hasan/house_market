@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IUser } from "../../../interfaces";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { RolesEnum } from "src/enums";
 
 @Entity('users')
 export class User implements IUser {
@@ -21,12 +22,12 @@ export class User implements IUser {
   @Column({ type: "text" })
   last_name: string;
 
-  @ApiProperty({ example: "johndoe@example.com", description: "Email manzili" })
+  @ApiProperty({ example: "johndoe@example.com", description: "Email manzili", })
   @Column({ type: "text" })
   email: string;
 
-  @ApiProperty({ example: "admin | user", description: "Foydalanuvchi roli",  })
-  @Column({ type: "varchar", default: "user" })
+  @ApiProperty({ example: "user", description: "Foydalanuvchi roli", enum: RolesEnum })
+  @Column({ type: "varchar", default: RolesEnum })
   role?: string;
 
   @ApiProperty({ example: "hashedpassword123", description: "Foydalanuvchi paroli (hashlangan)" })
