@@ -52,9 +52,9 @@ export class JwtAuthGuard implements CanActivate {
 			if (
 				error.name === "JsonWebTokenError" ||
 				error.message === "Malformed UTF-8 data"
-			) throw new UnauthorizedException("Xato token")
+			) throw new UnauthorizedException("Invalid token")
 
-			if (error.name === "TokenExpiredError") throw new UnauthorizedException("Token amal qilish muddati tugagan")
+			if (error.name === "TokenExpiredError") throw new UnauthorizedException("Token expired")
 
 			throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
 		}
