@@ -6,12 +6,8 @@ export const SwaggerConfig = (app: INestApplication) => {
 
 	const configService = app.get(ConfigService); // ConfigService ni olish
 
-<<<<<<< HEAD
-	const baseUrl = configService.get<string>('API_URL') || `http://localhost:${configService.get<string>('PORT')}`;
-=======
 	const baseUrl_1 = configService.get<string>('API_URL_1');
 	const baseUrl_2 = configService.get<string>('API_URL_2');
->>>>>>> 27cc6c8 ('http exception' xatosi togirlandi)
 
 	const options = new DocumentBuilder()
 		.setTitle('House market')
@@ -24,9 +20,5 @@ export const SwaggerConfig = (app: INestApplication) => {
 		.build()
 
 	const document = SwaggerModule.createDocument(app, options)
-	SwaggerModule.setup('api/docs', app, document, {
-		swaggerOptions: {
-			persistAuthorization: true
-		}
-	})
+	SwaggerModule.setup('api/docs', app, document)
 }

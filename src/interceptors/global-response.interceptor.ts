@@ -3,7 +3,7 @@ import { catchError, Observable, throwError } from "rxjs";
 import { map } from "rxjs/operators"
 
 @Injectable()
-export class GloabalResponseFormatterInterceptors implements NestInterceptor {
+export class GlobalResponseFormatterInterceptor implements NestInterceptor {
 
 	intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> {
 		return next.handle().pipe(
@@ -16,7 +16,8 @@ export class GloabalResponseFormatterInterceptors implements NestInterceptor {
 
 				if (error instanceof HttpException) {
 					const response = error.getResponse();
-
+					console.log(response);
+					
 					return throwError(() =>
 						new HttpException(
 							{
@@ -28,12 +29,11 @@ export class GloabalResponseFormatterInterceptors implements NestInterceptor {
 					);
 				}
 
-
 				return throwError(() =>
 					new HttpException(
 						{
 							success: false,
-							error: error.message || "Internal Server Error"
+							error
 						},
 						HttpStatus.INTERNAL_SERVER_ERROR
 					)
