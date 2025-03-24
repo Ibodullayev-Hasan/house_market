@@ -1,27 +1,28 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException, NotFoundException } from "@nestjs/common";
+import { ArgumentsHost, Catch, ExceptionFilter, HttpException, MethodNotAllowedException, NotFoundException, HttpStatus } from "@nestjs/common";
 import { Response } from "express";
 
 @Catch(NotFoundException)
-export class  NotFoundExceptionFilter implements ExceptionFilter {
-
+export class NotFoundExceptionFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
-    const ctx = host.switchToHttp()
-    const response = ctx.getResponse<Response>()
-    const status = exception.getStatus()
+    const ctx = host.switchToHttp();
+    const response = ctx.getResponse<Response>();
+    const request = ctx.getRequest<Request>();
 
-    const message =
-      exception.message.split(" /", 2)[0] === "Cannot GET" ||
-        exception.message.split(" /", 2)[0] === "Cannot POST" ||
-        exception.message.split(" /", 2)[0] === "Cannot PUT" ||
-        exception.message.split(" /", 2)[0] === "Cannot HEAD" ||
-        exception.message.split(" /", 2)[0] === "Cannot PATCH" ||
-        exception.message.split(" /", 2)[0] === "Cannot DELETE"
-        ? `Route that does not exist`
-        : exception.message
+    const message = exception.message;
 
-    response.status(status).send({
-      success:false,
-      message,
-    })
+    // Agar xato "Cannot [METHOD] /path" ko'rinishida bo'lsa, demak noto'g'ri method
+    if (message.startsWith("Cannot ")) {
+      response.status(HttpStatus.METHOD_NOT_ALLOWED).send({
+        success: false,
+        message: "Method Not Allowed",
+      });
+      return;
+    }
+
+    // Aks holda, 404 qaytarish
+    response.status(HttpStatus.NOT_FOUND).send({
+      success: false,
+      message: "Route Not Found",
+    });
   }
 }
