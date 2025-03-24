@@ -21,7 +21,9 @@ export class UsersService {
         return el
       })
     } catch (error) {
-      throw new HttpException(error.message, HttpStatus.BAD_REQUEST)
+      throw error instanceof HttpException
+      ? error
+      : new HttpException(error.message, HttpStatus.BAD_REQUEST)
 
     }
   }

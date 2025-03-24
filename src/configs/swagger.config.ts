@@ -6,14 +6,20 @@ export const SwaggerConfig = (app: INestApplication) => {
 
 	const configService = app.get(ConfigService); // ConfigService ni olish
 
+<<<<<<< HEAD
 	const baseUrl = configService.get<string>('API_URL') || `http://localhost:${configService.get<string>('PORT')}`;
+=======
+	const baseUrl_1 = configService.get<string>('API_URL_1');
+	const baseUrl_2 = configService.get<string>('API_URL_2');
+>>>>>>> 27cc6c8 ('http exception' xatosi togirlandi)
 
 	const options = new DocumentBuilder()
 		.setTitle('House market')
 		.setDescription('House market API documentation')
 		.setVersion('1.0')
 		.addTag('House market API')
-		.addServer(`${baseUrl}/`, `Dynamic Server`)
+		.addServer(`${baseUrl_1}/`, `Dynamic Server`)
+		.addServer(`${baseUrl_2}/`, `Localni Server`)
 		.addBearerAuth()
 		.build()
 

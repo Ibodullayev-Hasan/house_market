@@ -1,6 +1,5 @@
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, Length, Matches } from "class-validator";
-import { RolesEnum } from "src/enums";
+import { ApiProperty } from "@nestjs/swagger";
+import { IsEmail, IsNotEmpty, IsOptional, IsString, Length, Matches } from "class-validator";
 
 export class CreateUserDto {
 
@@ -24,13 +23,8 @@ export class CreateUserDto {
 	@IsEmail()
 	email: string;
 
-	// @ApiProperty({ example: RolesEnum, description: "Foydalanuvchi roli",  })
-	// @IsOptional()
-	// @IsEnum(RolesEnum, { message: "The role should only be admin or user" })
-	// role?: string;
-
 	@ApiProperty({
-		example: "Aaa123",
+		example: "A123b",
 		description: "Parol 4-8 ta belgidan iborat bo‘lishi kerak. Kamida 1 ta katta harf, 1 ta kichik harf va 3 ta raqam bo‘lishi shart.",
 		minLength: 4,
 		maxLength: 8

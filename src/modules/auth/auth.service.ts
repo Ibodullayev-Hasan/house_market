@@ -52,7 +52,9 @@ export class AuthService {
         accessExpiresIn: token.accessExpiresIn,
       }
     } catch (error: any) {
-      throw new HttpException(error.message, HttpStatus.BAD_REQUEST)
+      throw error instanceof HttpException
+        ? error
+        : new HttpException(error.message, HttpStatus.BAD_REQUEST)
     }
   }
 
@@ -80,7 +82,9 @@ export class AuthService {
         refreshExpiresIn: tokens.refreshExpiresIn
       }
     } catch (error: any) {
-      throw new HttpException(error.message, HttpStatus.BAD_REQUEST)
+      throw error instanceof HttpException
+        ? error
+        : new HttpException(error.message, HttpStatus.BAD_REQUEST)
     }
   }
 
@@ -98,7 +102,9 @@ export class AuthService {
         accessExpiresIn: tokens.accessExpiresIn,
       }
     } catch (error: any) {
-      throw new HttpException(error.message, HttpStatus.BAD_REQUEST)
+      throw error instanceof HttpException
+        ? error
+        : new HttpException(error.message, HttpStatus.BAD_REQUEST)
     }
   }
 }

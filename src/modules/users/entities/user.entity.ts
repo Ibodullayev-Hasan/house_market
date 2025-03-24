@@ -26,7 +26,7 @@ export class User implements IUser {
   @Column({ type: "text" })
   email: string;
 
-  @ApiProperty({ example: "user", description: "Foydalanuvchi roli", enum: RolesEnum })
+  @ApiProperty({ example: "user", description: "Foydalanuvchi roli", enum: RolesEnum, default: RolesEnum.USER })
   @Column({ type: "varchar", default: RolesEnum.USER })
   role?: string;
 
