@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { CorsConfig, SetupGlobalPipes, SwaggerConfig } from './configs';
-import { GlobalExceptionFilter } from './filters/http-exception.filter';
+import { NotFoundExceptionFilter } from './filters/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,7 +14,7 @@ async function bootstrap() {
   SwaggerConfig(app)
   SetupGlobalPipes(app)
 
-  app.useGlobalFilters(new GlobalExceptionFilter())
+  app.useGlobalFilters(new NotFoundExceptionFilter())
 
   const port = configServie.get<number>("PORT")
 
